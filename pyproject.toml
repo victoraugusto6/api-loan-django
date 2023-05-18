@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Onidata loan challenge django"
 authors = ["Victor Augusto <victor.augusto.soliveira@gmail.com>"]
 readme = "README.md"
-packages = [{include = "onidata_loan_django"}]
+packages = [{ include = "onidata_loan_django" }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -12,6 +12,11 @@ django = "^4.2.1"
 
 [tool.poetry.dev-dependencies]
 pytest-django = "*"
+flake8 = "*"
+black = "*"
+isort = "*"
+pre-commit = "*"
+django-debug-toolbar = "*"
 
 [build-system]
 requires = ["poetry-core"]
