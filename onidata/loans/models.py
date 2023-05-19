@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from _decimal import Decimal
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
@@ -5,6 +7,7 @@ from django.db import models
 
 
 class Loan(models.Model):
+    identifier = models.UUIDField(default=uuid4)
     nominal_value = models.DecimalField(
         max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal("0.01"))]
     )
@@ -21,6 +24,7 @@ class Loan(models.Model):
 
 
 class Payment(models.Model):
+    identifier = models.UUIDField(default=uuid4)
     loan = models.ForeignKey(Loan, on_delete=models.CASCADE, related_name="payments")
     payment_date = models.DateField()
     payment_amount = models.DecimalField(

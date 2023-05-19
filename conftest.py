@@ -1,7 +1,7 @@
 import pytest
 from django.contrib.auth.models import User
 from model_bakery import baker
-from onidata.loans.models import Loan
+from onidata.loans.models import Loan, Payment
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
 
@@ -21,3 +21,8 @@ def user(db):
 @pytest.fixture
 def loan(user):
     return baker.make(Loan, client=user)
+
+
+@pytest.fixture
+def payment(loan):
+    return baker.make(Payment, loan=loan)
