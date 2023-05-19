@@ -1,4 +1,5 @@
 from _decimal import Decimal
+from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 from django.db import models
 
@@ -13,7 +14,7 @@ class Loan(models.Model):
     ip_address = models.GenericIPAddressField()
     request_date = models.DateField()
     bank = models.CharField(max_length=60)
-    client = models.CharField(max_length=60)
+    client = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.client} - {self.ip_address}"
