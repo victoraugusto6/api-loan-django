@@ -133,6 +133,6 @@ REST_FRAMEWORK = {
 
 # Django Debug Toolbar
 INTERNAL_IPS = os.environ.get("INTERNAL_IPS", "127.0.0.1").replace(" ", "").split(",")
-if not DEBUG:
+if DEBUG:
     INSTALLED_APPS.append("debug_toolbar")
     MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
