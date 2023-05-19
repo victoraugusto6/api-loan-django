@@ -44,3 +44,10 @@ jobs:
         uses: py-actions/flake8@v1
         with:
           checkName: 'flake8_py3'
+      - name: run pytest
+        run: |
+          poetry run pytest --cov=./ --cov-report=xml
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

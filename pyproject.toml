@@ -24,6 +24,13 @@ black = "*"
 isort = "*"
 pre-commit = "*"
 django-debug-toolbar = "*"
+model-bakery = "^1.11.0"
+django-extensions = "^3.2.1"
+pytest-cov = "^4.0.0"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "onidata.settings"
+python_files = ["tests_*.py"]
 
 [build-system]
 requires = ["poetry-core"]
