@@ -16,6 +16,7 @@ psycopg2-binary = "^2.9.6"
 djangorestframework = "^3.14.0"
 markdown = "^3.4.3"
 django-filter = "^23.2"
+whitenoise = "^6.4.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest-django = "*"
