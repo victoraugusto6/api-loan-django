@@ -24,6 +24,25 @@ def test_user_post_loan(api_client, user):
     assert Loan.objects.exists()
 
 
+def test_user_post_loan_use_ip(api_client, user):
+    api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {user.auth_token.key}")
+
+    payload = {
+        "payments": [],
+        "nominal_value": "1000.00",
+        "interest_rate": "10.00",
+        "ip_address": "70.153.196.199",
+        "request_date": "2023-05-19",
+        "bank": "Bank Test",
+        "client": user.pk,
+    }
+
+    response = api_client.post("/loans/", payload, "json")
+
+    assert response.status_code == status.HTTP_201_CREATED
+    assert response.data["ip_address"] == "127.0.0.1"
+
+
 def test_user_view_loans(api_client, user, loan):
     api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {user.auth_token.key}")
 

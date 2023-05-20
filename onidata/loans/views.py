@@ -16,7 +16,12 @@ class LoanListCreateAPIView(generics.ListCreateAPIView):
         return Loan.objects.filter(client=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save()
+        user_ip_address = self.request.META.get("HTTP_X_FORWARDED_FOR")
+        if user_ip_address:
+            ip = user_ip_address.split(",")[0]
+        else:
+            ip = self.request.META.get("REMOTE_ADDR")
+        serializer.save(ip_address=ip)
 
 
 class LoanDetailAPIView(generics.RetrieveAPIView):

@@ -29,6 +29,7 @@ class PaymentSerializer(serializers.ModelSerializer):
 
 
 class LoanSerializer(serializers.ModelSerializer):
+    ip_address = serializers.ReadOnlyField()
     payments = PaymentSerializer(many=True, read_only=True)
     balance_due = serializers.SerializerMethodField()
 
