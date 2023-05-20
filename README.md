@@ -43,7 +43,7 @@ python manage.py runserver
 | Package                  | Description                                                                                    |
 |--------------------------|------------------------------------------------------------------------------------------------|
 | **django**               | A high-level Python web framework for building robust and scalable web applications.           |
-| **python-dotenv**        | A Python library that allows you to manage application-specific settings in a .env file.       | 
+| **python-dotenv**        | A Python library that allows you to manage application-specific settings in a .env file.       |
 | **dj-database-url**      | A Django utility that allows you to configure the database connection using a URL.             |
 | **gunicorn**             | A lightweight and efficient HTTP server for running Python web applications.                   |
 | **psycopg2-binary**      | A PostgreSQL adapter for Python that enables interaction with PostgreSQL databases.            |
@@ -57,3 +57,15 @@ python manage.py runserver
 | **model-bakery**         | A library for creating model instances in Django tests with minimal code.                      |
 | **django-extensions**    | A collection of custom extensions and management commands for Django projects.                 |
 | **pytest-cov**           | A plugin for pytest that generates code coverage reports during testing.                       |
+
+---
+
+### 🌎 Deploy using Fly.io
+
+https://api-loan-django.fly.dev/
+
+Test user in django admin:
+
+| username | password |
+|----------|----------|
+| user     | loanapi  |

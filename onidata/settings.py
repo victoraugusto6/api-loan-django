@@ -31,6 +31,11 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 DEBUG = eval(os.environ.get("DEBUG", "True"))
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").replace(" ", "").split(",")
+CSRF_TRUSTED_ORIGINS = (
+    os.environ.get("CSRF_TRUSTED_ORIGINS", default="http://127.0.0.1")
+    .replace(" ", "")
+    .split(",")
+)
 
 # Application definition
 
@@ -43,12 +48,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework.authtoken",
-    "django_extensions",
     "onidata.loans",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -117,6 +122,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -133,8 +144,9 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 2,
 }
 
-# Django Debug Toolbar
+# Django Debug Toolbar and Django Extensions
 INTERNAL_IPS = os.environ.get("INTERNAL_IPS", "127.0.0.1").replace(" ", "").split(",")
 if DEBUG:
     INSTALLED_APPS.append("debug_toolbar")
     MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
+    INSTALLED_APPS.append("django_extensions")
