@@ -3,13 +3,12 @@ from rest_framework.permissions import IsAuthenticated
 
 from ..auth import BearerToken
 from .models import Loan, Payment
-from .permissions import IsOwner
 from .serializers import LoanSerializer, PaymentSerializer
 
 
 class LoanListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = LoanSerializer
-    permission_classes = (IsAuthenticated, IsOwner)
+    permission_classes = (IsAuthenticated,)
     authentication_classes = (BearerToken,)
 
     def get_queryset(self):
@@ -26,7 +25,7 @@ class LoanListCreateAPIView(generics.ListCreateAPIView):
 
 class LoanDetailAPIView(generics.RetrieveAPIView):
     serializer_class = LoanSerializer
-    permission_classes = (IsAuthenticated, IsOwner)
+    permission_classes = (IsAuthenticated,)
     authentication_classes = (BearerToken,)
 
     def get_queryset(self):
@@ -35,7 +34,7 @@ class LoanDetailAPIView(generics.RetrieveAPIView):
 
 class PaymentListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = PaymentSerializer
-    permission_classes = (IsAuthenticated, IsOwner)
+    permission_classes = (IsAuthenticated,)
     authentication_classes = (BearerToken,)
 
     def get_queryset(self):
@@ -47,7 +46,7 @@ class PaymentListCreateAPIView(generics.ListCreateAPIView):
 
 class PaymentDetailAPIView(generics.RetrieveAPIView):
     serializer_class = PaymentSerializer
-    permission_classes = (IsAuthenticated, IsOwner)
+    permission_classes = (IsAuthenticated,)
     authentication_classes = (BearerToken,)
 
     def get_queryset(self):
