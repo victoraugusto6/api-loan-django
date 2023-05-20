@@ -8,34 +8,42 @@ from .serializers import LoanSerializer, PaymentSerializer
 
 
 class LoanListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Loan.objects.all()
     serializer_class = LoanSerializer
     permission_classes = (IsAuthenticated, IsOwner)
     authentication_classes = (BearerToken,)
+
+    def get_queryset(self):
+        return Loan.objects.filter(client=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save()
 
 
 class LoanDetailAPIView(generics.RetrieveAPIView):
-    queryset = Loan.objects.all()
     serializer_class = LoanSerializer
     permission_classes = (IsAuthenticated, IsOwner)
     authentication_classes = (BearerToken,)
 
+    def get_queryset(self):
+        return Loan.objects.filter(client=self.request.user)
+
 
 class PaymentListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
     permission_classes = (IsAuthenticated, IsOwner)
     authentication_classes = (BearerToken,)
+
+    def get_queryset(self):
+        return Payment.objects.filter(loan__client=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save()
 
 
 class PaymentDetailAPIView(generics.RetrieveAPIView):
-    queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
     permission_classes = (IsAuthenticated, IsOwner)
     authentication_classes = (BearerToken,)
+
+    def get_queryset(self):
+        return Payment.objects.filter(loan__client=self.request.user)
