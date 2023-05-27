@@ -266,6 +266,18 @@ files = [
 Django = ">=3.2"
 
 [[package]]
+name = "django-ipware"
+version = "5.0.0"
+description = "A Django application to retrieve user's IP address"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "django-ipware-5.0.0.tar.gz", hash = "sha256:4fa5607ee85e12ee5e158bc7569ff1e134fb1579681aa1ff3f0ed04be21be153"},
+    {file = "django_ipware-5.0.0-py2.py3-none-any.whl", hash = "sha256:80b52a3f571a371519cc552798f1015b934dd5dd7738bfad87e101e861bd21b8"},
+]
+
+[[package]]
 name = "djangorestframework"
 version = "3.14.0"
 description = "Web APIs for Django, made easy."
@@ -879,4 +891,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "367f5f209695e6301dec64bd78f6e34c40b6f8e013c3843376d7980cadf68305"
+content-hash = "4b2fe4ffec225affffa3f3b750c4c2d2777272da93ec46ee0b9f80bbfb919986"

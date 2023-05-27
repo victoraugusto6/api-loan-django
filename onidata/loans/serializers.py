@@ -1,5 +1,3 @@
-from _decimal import Decimal
-from django.db.models import Sum
 from rest_framework import serializers
 
 from .models import Loan, Payment
@@ -38,15 +36,4 @@ class LoanSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def get_balance_due(self, obj):
-        total_payments = obj.payments.aggregate(sum_payments=Sum("payment_amount"))[
-            "sum_payments"
-        ]
-        nomimal_value = obj.nominal_value
-        interest_rate = obj.interest_rate
-
-        if not total_payments:
-            total_payments = Decimal("0")
-
-        balance_due = nomimal_value - total_payments
-        balance_due += balance_due * (interest_rate / 100)
-        return balance_due
+        return obj.get_balance_due()
