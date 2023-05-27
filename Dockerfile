@@ -2,10 +2,15 @@ ARG PYTHON_VERSION=3.10-slim-buster
 
 FROM python:${PYTHON_VERSION}
 
+LABEL org.opencontainers.image.source=https://github.com/victoraugusto6/api-loan-django
+
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 RUN mkdir -p /code
+
+# mock secrets to deploy
+CMD ["cp", "contrib/env-sample", ".env"]
 
 WORKDIR /code
 
