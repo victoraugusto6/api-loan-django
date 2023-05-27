@@ -17,6 +17,7 @@ markdown = "^3.4.3"
 django-filter = "^23.2"
 whitenoise = "^6.4.0"
 python-decouple = "^3.8"
+django-ipware = "^5.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest-django = "*"

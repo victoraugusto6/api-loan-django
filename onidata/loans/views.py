@@ -1,3 +1,4 @@
+from ipware import get_client_ip
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
@@ -15,12 +16,8 @@ class LoanListCreateAPIView(generics.ListCreateAPIView):
         return Loan.objects.filter(client=self.request.user)
 
     def perform_create(self, serializer):
-        user_ip_address = self.request.META.get("HTTP_X_FORWARDED_FOR")
-        if user_ip_address:
-            ip = user_ip_address.split(",")[0]
-        else:
-            ip = self.request.META.get("REMOTE_ADDR")
-        serializer.save(ip_address=ip)
+        client_ip, is_routable = get_client_ip(self.request)
+        serializer.save(ip_address=client_ip)
 
 
 class LoanDetailAPIView(generics.RetrieveAPIView):
