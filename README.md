@@ -21,7 +21,7 @@ poetry install --no-root --with dev --sync
 - copy env-sample to .env, run:
 
 ```commandline
-cp contrib/env-samplle .env
+cp contrib/env-sample .env
 ```
 
 - create **[Docker](https://www.docker.com/)** container, run:
