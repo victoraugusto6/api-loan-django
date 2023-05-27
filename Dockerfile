@@ -9,9 +9,6 @@ ENV PYTHONUNBUFFERED 1
 
 RUN mkdir -p /code
 
-# mock secrets to deploy
-CMD ["cp", "contrib/env-sample", ".env"]
-
 WORKDIR /code
 
 ENV DEBUG "False"
@@ -21,6 +18,9 @@ COPY pyproject.toml poetry.lock /code/
 RUN poetry config virtualenvs.create false
 RUN poetry install --only main --no-root --no-interaction
 COPY . /code
+
+# mock secrets to deploy/
+COPY contrib/env-sample .env
 
 RUN python manage.py collectstatic --noinput
 
