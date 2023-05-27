@@ -9,14 +9,11 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-import os
 from functools import partial
 from pathlib import Path
 
 import dj_database_url
-from dotenv import load_dotenv
-
-load_dotenv()
+from decouple import Csv, config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,16 +22,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = eval(os.environ.get("DEBUG", "True"))
+DEBUG = config("DEBUG", cast=bool, default=True)
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").replace(" ", "").split(",")
-CSRF_TRUSTED_ORIGINS = (
-    os.environ.get("CSRF_TRUSTED_ORIGINS", default="http://127.0.0.1")
-    .replace(" ", "")
-    .split(",")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
+CSRF_TRUSTED_ORIGINS = config(
+    "CSRF_TRUSTED_ORIGINS", cast=Csv(), default="http://127.0.0.1"
 )
 
 # Application definition
@@ -87,7 +82,7 @@ WSGI_APPLICATION = "onidata.wsgi.application"
 
 parse_database = partial(dj_database_url.parse, conn_max_age=600)
 
-DATABASES = {"default": parse_database(os.environ["DATABASE_URL"])}
+DATABASES = {"default": parse_database(config("DATABASE_URL"))}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -145,7 +140,7 @@ REST_FRAMEWORK = {
 }
 
 # Django Debug Toolbar and Django Extensions
-INTERNAL_IPS = os.environ.get("INTERNAL_IPS", "127.0.0.1").replace(" ", "").split(",")
+INTERNAL_IPS = config("INTERNAL_IPS", cast=Csv(), default="127.0.0.1")
 if DEBUG:
     INSTALLED_APPS.append("debug_toolbar")
     MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
