@@ -43,7 +43,7 @@ python manage.py runserver
 | Package                  | Description                                                                                    |
 |--------------------------|------------------------------------------------------------------------------------------------|
 | **django**               | A high-level Python web framework for building robust and scalable web applications.           |
-| **python-dotenv**        | A Python library that allows you to manage application-specific settings in a .env file.       |
+| **python-decouple**      | A Python library that allows you to manage application-specific settings in a .env file.       |
 | **dj-database-url**      | A Django utility that allows you to configure the database connection using a URL.             |
 | **gunicorn**             | A lightweight and efficient HTTP server for running Python web applications.                   |
 | **psycopg2-binary**      | A PostgreSQL adapter for Python that enables interaction with PostgreSQL databases.            |
